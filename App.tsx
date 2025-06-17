@@ -1,10 +1,18 @@
-
-import React, { useState, useRef, useCallback } from 'react';
-import { ImageUploader } from './components/ImageUploader';
-import { InteractiveImageDisplay, InteractiveImageDisplayRef } from './components/InteractiveImageDisplay';
-import { LoadingSpinner } from './components/LoadingSpinner';
-import { getExplanationForImageRegion } from './services/geminiService';
-import { AlertTriangle, Lightbulb, UploadCloud, XCircle, Edit3 } from './components/icons';
+import React, { useState, useRef, useCallback } from "react";
+import { ImageUploader } from "./components/ImageUploader";
+import {
+  InteractiveImageDisplay,
+  InteractiveImageDisplayRef,
+} from "./components/InteractiveImageDisplay";
+import { LoadingSpinner } from "./components/LoadingSpinner";
+import { getExplanationForImageRegion } from "./services/geminiService";
+import {
+  AlertTriangle,
+  Lightbulb,
+  UploadCloud,
+  XCircle,
+  Edit3,
+} from "./components/icons";
 
 const App: React.FC = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -39,7 +47,9 @@ const App: React.FC = () => {
       return;
     }
     if (!hasMarkings) {
-      setError("Please mark or underline the area on the image to learn about.");
+      setError(
+        "Please mark or underline the area on the image to learn about."
+      );
       return;
     }
     if (!interactiveImageRef.current) {
@@ -47,9 +57,12 @@ const App: React.FC = () => {
       return;
     }
 
-    const annotatedImageDataUrl = interactiveImageRef.current.getAnnotatedImageDataUrl();
+    const annotatedImageDataUrl =
+      interactiveImageRef.current.getAnnotatedImageDataUrl();
     if (!annotatedImageDataUrl) {
-      setError("Could not get annotated image data. Please try re-marking the area.");
+      setError(
+        "Could not get annotated image data. Please try re-marking the area."
+      );
       return;
     }
 
@@ -58,13 +71,18 @@ const App: React.FC = () => {
     setGeminiResponse(null);
 
     try {
-      const explanation = await getExplanationForImageRegion(annotatedImageDataUrl);
+      const explanation = await getExplanationForImageRegion(
+        annotatedImageDataUrl
+      );
       setGeminiResponse(explanation);
     } catch (err) {
       console.error("Gemini API error:", err);
-      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred.";
+      const errorMessage =
+        err instanceof Error ? err.message : "An unknown error occurred.";
       if (errorMessage.includes("API key not valid")) {
-        setError("Invalid API Key. Please check your API_KEY environment variable.");
+        setError(
+          "Invalid API Key. Please check your API_KEY environment variable."
+        );
       } else {
         setError(`Failed to get explanation: ${errorMessage}`);
       }
@@ -96,14 +114,21 @@ const App: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Left Column: Image Upload and Display */}
           <div className="flex flex-col space-y-6">
-            <ImageUploader onImageUpload={handleImageUpload} disabled={isLoading} />
-            
+            <ImageUploader
+              onImageUpload={handleImageUpload}
+              disabled={isLoading}
+            />
+
             {uploadedFile ? (
               <div className="bg-slate-700 p-4 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-3 text-sky-400 flex items-center">
-                  <Edit3 className="w-6 h-6 mr-2 text-sky-500" /> Interactive Image
+                  <Edit3 className="w-6 h-6 mr-2 text-sky-500" /> Interactive
+                  Image
                 </h2>
-                 <p className="text-sm text-slate-400 mb-2">Click and drag on the image to underline or mark areas of interest.</p>
+                <p className="text-sm text-slate-400 mb-2">
+                  Click and drag on the image to underline or mark areas of
+                  interest.
+                </p>
                 <InteractiveImageDisplay
                   ref={interactiveImageRef}
                   imageFile={uploadedFile}
@@ -123,7 +148,9 @@ const App: React.FC = () => {
           {/* Right Column: Controls and Results */}
           <div className="flex flex-col space-y-6">
             <div className="bg-slate-700 p-4 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold mb-3 text-sky-400">Controls</h2>
+              <h2 className="text-xl font-semibold mb-3 text-sky-400">
+                Controls
+              </h2>
               <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
                 <button
                   onClick={handleLearn}
@@ -131,7 +158,7 @@ const App: React.FC = () => {
                   className="flex-1 flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-colors duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Lightbulb className="w-5 h-5 mr-2" />
-                  {isLoading ? 'Learning...' : 'Learn About Markings'}
+                  {isLoading ? "Learning..." : "Learn About Markings"}
                 </button>
                 <button
                   onClick={handleClear}
@@ -145,7 +172,10 @@ const App: React.FC = () => {
             </div>
 
             {error && (
-              <div className="bg-red-700/50 border border-red-500 text-red-100 px-4 py-3 rounded-lg shadow-md flex items-start" role="alert">
+              <div
+                className="bg-red-700/50 border border-red-500 text-red-100 px-4 py-3 rounded-lg shadow-md flex items-start"
+                role="alert"
+              >
                 <AlertTriangle className="w-5 h-5 mr-3 mt-1 text-red-300" />
                 <div>
                   <strong className="font-bold">Error:</strong>
@@ -160,33 +190,46 @@ const App: React.FC = () => {
                 <p className="mt-4 text-slate-300">AI is thinking...</p>
               </div>
             )}
-            
+
             {geminiResponse && !isLoading && (
               <div className="bg-slate-700 p-4 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-3 text-sky-400">Explanation</h2>
+                <h2 className="text-xl font-semibold mb-3 text-sky-400">
+                  Explanation
+                </h2>
                 <div className="prose prose-invert max-w-none text-slate-200 whitespace-pre-wrap">
                   {geminiResponse}
                 </div>
               </div>
             )}
-             {!geminiResponse && !isLoading && !error && uploadedFile && hasMarkings && (
-              <div className="flex flex-col items-center justify-center h-48 bg-slate-700 rounded-lg p-4 text-slate-400 shadow-md">
-                <Lightbulb className="w-12 h-12 mb-3" />
-                <p>Click "Learn About Markings" to get an explanation for the marked area.</p>
-              </div>
-            )}
-             {!geminiResponse && !isLoading && !error && uploadedFile && !hasMarkings && (
-              <div className="flex flex-col items-center justify-center h-48 bg-slate-700 rounded-lg p-4 text-slate-400 shadow-md">
-                <Edit3 className="w-12 h-12 mb-3 text-sky-500" />
-                <p>Use your cursor to mark or underline parts of the image you want to understand.</p>
-              </div>
-            )}
+            {!geminiResponse &&
+              !isLoading &&
+              !error &&
+              uploadedFile &&
+              hasMarkings && (
+                <div className="flex flex-col items-center justify-center h-48 bg-slate-700 rounded-lg p-4 text-slate-400 shadow-md">
+                  <Lightbulb className="w-12 h-12 mb-3" />
+                  <p>
+                    Click "Learn About Markings" to get an explanation for the
+                    marked area.
+                  </p>
+                </div>
+              )}
+            {!geminiResponse &&
+              !isLoading &&
+              !error &&
+              uploadedFile &&
+              !hasMarkings && (
+                <div className="flex flex-col items-center justify-center h-48 bg-slate-700 rounded-lg p-4 text-slate-400 shadow-md">
+                  <Edit3 className="w-12 h-12 mb-3 text-sky-500" />
+                  <p>
+                    Use your cursor to mark or underline parts of the image you
+                    want to understand.
+                  </p>
+                </div>
+              )}
           </div>
         </div>
       </div>
-      <footer className="mt-12 text-center text-slate-400 text-sm">
-        <p>Powered by Gemini API</p>
-      </footer>
     </div>
   );
 };

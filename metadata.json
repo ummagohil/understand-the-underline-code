@@ -1,0 +1,5 @@
+
+{
+  "name": "Image Region Learner",
+  "description": "An application that allows users to upload images, highlight a region, and get an explanation of that region using Gemini API."
+}

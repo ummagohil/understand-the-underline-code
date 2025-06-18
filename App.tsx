@@ -1,10 +1,10 @@
 import { useState, useRef, useCallback } from "react";
-import { ImageUploader } from "./src/ImageUploader";
+import { ImageUploader } from "./src/components/ImageUploader";
 import {
   InteractiveImageDisplay,
   InteractiveImageDisplayRef,
-} from "./src/InteractiveImageDisplay";
-import { LoadingSpinner } from "./src/LoadingSpinner";
+} from "./src/components/InteractiveImageDisplay";
+import { LoadingSpinner } from "./src/components/LoadingSpinner";
 import { getExplanationForImageRegion } from "./utils/geminiService";
 import {
   AlertTriangle,
@@ -12,7 +12,7 @@ import {
   UploadCloud,
   XCircle,
   Edit3,
-} from "./src/icons";
+} from "./src/components/icons";
 
 const App = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);

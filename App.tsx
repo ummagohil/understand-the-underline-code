@@ -1,18 +1,16 @@
 import { useState, useRef, useCallback } from "react";
-import { ImageUploader } from "./src/components/ImageUploader";
 import {
+  ImageUploader,
   InteractiveImageDisplay,
-  InteractiveImageDisplayRef,
-} from "./src/components/InteractiveImageDisplay";
-import { LoadingSpinner } from "./src/components/LoadingSpinner";
-import { getExplanationForImageRegion } from "./utils/geminiService";
-import {
+  LoadingSpinner,
   AlertTriangle,
   Lightbulb,
   UploadCloud,
   XCircle,
   Edit3,
-} from "./src/components/icons";
+} from "./src/components";
+import { InteractiveImageDisplayRef } from "./src/components/InteractiveImageDisplay";
+import { getExplanationForImageRegion } from "./utils/geminiService";
 
 const App = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);

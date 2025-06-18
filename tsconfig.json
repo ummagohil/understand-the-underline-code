@@ -23,8 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    /* Test */
+    "types": ["vite/client", "vitest/globals"],
     "paths": {
-      "@/*" :  ["./*"]
+      "@/*": ["./*"]
     }
-  }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
 }

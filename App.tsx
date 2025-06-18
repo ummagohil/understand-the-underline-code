@@ -1,20 +1,20 @@
-import React, { useState, useRef, useCallback } from "react";
-import { ImageUploader } from "./components/ImageUploader";
+import { useState, useRef, useCallback } from "react";
+import { ImageUploader } from "./src/ImageUploader";
 import {
   InteractiveImageDisplay,
   InteractiveImageDisplayRef,
-} from "./components/InteractiveImageDisplay";
-import { LoadingSpinner } from "./components/LoadingSpinner";
-import { getExplanationForImageRegion } from "./services/geminiService";
+} from "./src/InteractiveImageDisplay";
+import { LoadingSpinner } from "./src/LoadingSpinner";
+import { getExplanationForImageRegion } from "./utils/geminiService";
 import {
   AlertTriangle,
   Lightbulb,
   UploadCloud,
   XCircle,
   Edit3,
-} from "./components/icons";
+} from "./src/icons";
 
-const App: React.FC = () => {
+const App = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);

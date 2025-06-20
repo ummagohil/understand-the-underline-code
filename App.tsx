@@ -101,7 +101,7 @@ const App = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-700 text-gray-100 p-4 sm:p-6 md:p-8 flex flex-col items-center">
       <header className="mb-8 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
-          Image Region Learner
+          Understand the Underline
         </h1>
         <p className="text-slate-300 mt-2 text-sm sm:text-base">
           Upload an image, mark or underline a region, and let AI explain it.

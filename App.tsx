@@ -87,8 +87,7 @@ const App = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [uploadedFile, hasMarkings]); // hasMarkings is a dependency here
-
+  }, [uploadedFile, hasMarkings]);
   const handleClear = () => {
     setUploadedFile(null);
     setGeminiResponse(null);

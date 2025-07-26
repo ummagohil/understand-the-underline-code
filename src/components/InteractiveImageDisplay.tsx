@@ -153,10 +153,10 @@ export const InteractiveImageDisplay = forwardRef<
       const rect = canvas.getBoundingClientRect();
       const clientX = "touches" in evt ? evt.touches[0].clientX : evt.clientX;
       const clientY = "touches" in evt ? evt.touches[0].clientY : evt.clientY;
-      return {
-        x: clientX - rect.left,
-        y: clientY - rect.top,
-      };
+      // Map from CSS/display coordinates to canvas buffer coordinates
+      const x = ((clientX - rect.left) / rect.width) * canvas.width;
+      const y = ((clientY - rect.top) / rect.height) * canvas.height;
+      return { x, y };
     };
 
     const handleInteractionStart = (

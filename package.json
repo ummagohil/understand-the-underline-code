@@ -13,7 +13,7 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
-    "@google/genai": "^1.5.1",
+    "@google/genai": "^1.52.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -30,7 +30,7 @@
     "@vitest/ui": "^4.1.11",
     "jsdom": "^26.1.0",
     "typescript": "~5.7.2",
-    "vite": "^8.2.1",
+    "vite": "^8.3.8",
     "vitest": "^4.1.11"
   }
 }
